@@ -62,7 +62,12 @@ func NewDependencyCalculator(logStorage *LogStorage, dependencyWriter dependency
 }
 
 func (dc *DependencyCalculator) ParseDate(date string) (time.Time, error) {
-	return time.Parse("2006-01-02 15", date)
+	l, err := time.LoadLocation("Asia/Shanghai")
+	if err != nil {
+		panic(err)
+	}
+
+	return time.ParseInLocation("2006-01-02 15", date, l)
 }
 
 // Start start calculate dependency

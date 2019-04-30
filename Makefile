@@ -193,6 +193,18 @@ build-collector-windows:
 build-collector-darwin:
 	CGO_ENABLED=0 GOOS=darwin installsuffix=cgo go build -o ./cmd/collector/collector-darwin $(BUILD_INFO) ./cmd/collector/main.go
 
+.PHONY: build-sls-dependencies-linux
+build-sls-dependencies-linux:
+	CGO_ENABLED=0 GOOS=linux installsuffix=cgo go build -o ./cmd/sls-dependencies/sls-dependencies-linux $(BUILD_INFO) ./cmd/sls-dependencies/main.go
+
+.PHONY: build-sls-dependencies-windows
+build-sls-dependencies-windows:
+	CGO_ENABLED=0 GOOS=windows installsuffix=cgo go build -o ./cmd/sls-dependencies/sls-dependencies-windows $(BUILD_INFO) ./cmd/sls-dependencies/main.go
+
+.PHONY: build-sls-dependencies-darwin
+build-sls-dependencies-darwin:
+	CGO_ENABLED=0 GOOS=darwin installsuffix=cgo go build -o ./cmd/sls-dependencies/sls-dependencies-darwin $(BUILD_INFO) ./cmd/sls-dependencies/main.go
+
 .PHONY: build-query-collector-linux
 build-query-collector-linux: fmt
 	make build-query-linux

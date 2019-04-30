@@ -15,7 +15,7 @@ import (
 const (
 	fromDataStr        = "from-date"
 	toDataStr          = "to-date"
-	defaultFromDataStr = "1970-01-01"
+	defaultFromDataStr = "1970-01-01 10"
 )
 
 // AddFlags adds flags for DependencyCalculator
@@ -23,11 +23,11 @@ func AddFlags(flags *flag.FlagSet) {
 	flags.String(
 		fromDataStr,
 		defaultFromDataStr,
-		"start date of traces to be processed. e.g. 2018-03-27")
+		"start date of traces to be processed. e.g. 2018-03-27 10")
 	flags.String(
 		toDataStr,
 		"",
-		"start date of traces to be processed. e.g. 2018-03-27")
+		"start date of traces to be processed. e.g. 2018-03-27 10")
 }
 
 // StartOption opetions for calculator
@@ -62,7 +62,7 @@ func NewDependencyCalculator(logStorage *LogStorage, dependencyWriter dependency
 }
 
 func (dc *DependencyCalculator) ParseDate(date string) (time.Time, error) {
-	return time.Parse("2006-01-02", date)
+	return time.Parse("2006-01-02 15", date)
 }
 
 // Start start calculate dependency

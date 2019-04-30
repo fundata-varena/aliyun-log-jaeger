@@ -144,18 +144,21 @@ build-all-linux: build_ui
 	make build-agent-linux
 	make build-query-linux
 	make build-collector-linux
+	make build-sls-dependency-linux
 
 .PHONY: build-all-windows
 build-all-windows: build_ui
 	make build-agent-windows
 	make build-query-windows
 	make build-collector-windows
+	make build-sls-dependency-windows
 
 .PHONY: build-all-darwin
 build-all-darwin: build_ui
 	make build-agent-darwin
 	make build-query-darwin
 	make build-collector-darwin
+	make build-sls-dependency-darwin
 
 .PHONY: build-agent-linux
 build-agent-linux:
@@ -192,6 +195,18 @@ build-collector-windows:
 .PHONY: build-collector-darwin
 build-collector-darwin:
 	CGO_ENABLED=0 GOOS=darwin installsuffix=cgo go build -o ./cmd/collector/collector-darwin $(BUILD_INFO) ./cmd/collector/main.go
+
+.PHONY: build-sls-dependency-linux
+build-sls-dependency-linux:
+	CGO_ENABLED=0 GOOS=linux installsuffix=cgo go build -o ./cmd/sls-dependencies/sls-dependency-linux $(BUILD_INFO) ./cmd/sls-dependencies/main.go
+
+.PHONY: build-sls-dependency-windows
+build-sls-dependency-windows:
+	CGO_ENABLED=0 GOOS=windows installsuffix=cgo go build -o ./cmd/sls-dependencies/sls-dependency-windows $(BUILD_INFO) ./cmd/sls-dependencies/main.go
+
+.PHONY: build-sls-dependency-darwin
+build-sls-dependency-darwin:
+	CGO_ENABLED=0 GOOS=darwin installsuffix=cgo go build -o ./cmd/sls-dependencies/sls-dependency-darwin $(BUILD_INFO) ./cmd/sls-dependencies/main.go
 
 .PHONY: build-query-collector-linux
 build-query-collector-linux: fmt
